@@ -13,12 +13,12 @@ class Account(models.Model):
         return self.first_name + '' + self.last_name
 
 
-TransactionTypes = [('Deposit', 'Deposit'), ('Withdrawal', 'Withdrawal')]
+TransactionTypes = [('Deposit', 'Deposit'), ('Withdraw', 'Withdraw')]
 
 
 class Transaction(models.Model):
-    date = models.DateField(max_length=10, choices=TransactionTypes)
-    type = models.DecimalField(max_digits=15, decimal_places=2)
+    date = models.DateField()
+    type = models.CharField(max_length=15, choices=TransactionTypes)
     amount = models.DecimalField(max_digits=15, decimal_places=2)
     description = models.CharField(max_length=100)
     account = models.ForeignKey(Account, on_delete=models.CASCADE)

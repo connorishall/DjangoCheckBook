@@ -1,6 +1,6 @@
 from typing import Dict
 
-import form as form
+
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template.context_processors import request
 from .models import Account, Transaction
@@ -28,8 +28,8 @@ def transaction(request):
             return balance(request, pk)
 
 
-content = {'form': form}
-return render(request, 'checkbook/AddTransaction.html', content)
+    content = {'form': form}
+    return render(request, 'checkbook/AddTransaction.html', content)
 
 
 def home(request):
@@ -43,7 +43,7 @@ def home(request):
 
 def balance(request, pk):
     account = get_object_or_404(Account, pk=pk)
-    transactions = Transaction.Transactions.filter(account = pk)
+    transactions = Transaction.Transaction.filter(account = pk)
     current_total = account.initial_deposit
     table_contents = { }
     for t in transactions:
@@ -57,5 +57,4 @@ def balance(request, pk):
     return render(request, 'checkbook/BalanceSheet.html', content)
 
 
-def transaction(request):
-    return render(request, 'checkbook/AddTransaction.html')
+
